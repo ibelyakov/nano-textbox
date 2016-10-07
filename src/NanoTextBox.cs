@@ -16,7 +16,7 @@ namespace NanoTextBox
             DependencyProperty.Register(
                 "SelectionForeground",
                 typeof(Brush),
-                typeof(InternalNanoTextBox),
+                typeof(NanoTextBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
