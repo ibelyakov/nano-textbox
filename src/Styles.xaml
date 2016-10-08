@@ -2,16 +2,38 @@
                     xmlns:nanoTextBox="clr-namespace:NanoTextBox"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="{x:Type nanoTextBox:NanoTextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type nanoTextBox:NanoTextBox}">
-                    <nanoTextBox:InternalNanoTextBox BaseBackground="{TemplateBinding Background}"
-                                                     BaseForeground="{TemplateBinding Foreground}"
-                                                     BaseSelectionBrush="{TemplateBinding SelectionBrush}"
-                                                     SelectionForeground="{TemplateBinding SelectionForeground}"
-                                                     Text="{TemplateBinding Text}"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type nanoTextBox:NanoTextBox}">
+                            <nanoTextBox:InternalNanoTextBox x:Name="InternalNanoTextBox"
+                                                         BaseBackground="{TemplateBinding Background}"
+                                                         BaseForeground="{TemplateBinding Foreground}"
+                                                         BaseSelectionBrush="{TemplateBinding SelectionBrush}"
+                                                         SelectionForeground="{TemplateBinding SelectionForeground}"
+                                                         Text="{TemplateBinding Text}"
+                                                         TextWrapping="{TemplateBinding TextWrapping}"
+                                                         MinLines="{TemplateBinding MinLines}"
+                                                         MaxLines="{TemplateBinding MaxLines}"
+                                                         CharacterCasing="{TemplateBinding CharacterCasing}"
+                                                         TextAlignment="{TemplateBinding TextAlignment}"
+                                                         TextDecorations="{TemplateBinding TextDecorations}"
+                                                         IsReadOnlyCaretVisible="{TemplateBinding IsReadOnlyCaretVisible}"
+                                                         AcceptsReturn="{TemplateBinding AcceptsReturn}"
+                                                         AcceptsTab="{TemplateBinding AcceptsTab}"
+                                                         HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                                                         VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
+                                                         IsUndoEnabled="{TemplateBinding IsUndoEnabled}"
+                                                         UndoLimit="{TemplateBinding UndoLimit}"
+                                                         AutoWordSelection="{TemplateBinding AutoWordSelection}"
+                                                         SelectionOpacity="{TemplateBinding SelectionOpacity}"
+                                                         CaretBrush="{TemplateBinding CaretBrush}"
+                                                         IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
