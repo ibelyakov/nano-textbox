@@ -11,16 +11,46 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/NanoTextBox;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="BackgroundColor">#FFFFFF</Color>
+            <Color x:Key="ForegroundColor">#000000</Color>
+            <Color x:Key="SelectionBrushColor">#800060</Color>
+            <Color x:Key="SelectionForegroundColor">#FFFFFF</Color>
+            <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+            <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
+            <SolidColorBrush x:Key="SelectionBrush" Color="{StaticResource SelectionBrushColor}"/>
+            <SolidColorBrush x:Key="SelectionForegroundBrush" Color="{StaticResource SelectionForegroundColor}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <nanoTextBox:NanoTextBox Width="80"
-                                 Height="25"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Center"
-                                 SelectionBrush="#810262"
-                                 SelectionForeground="#FFFFFF"
-                                 Background="#FFFFFF"
-                                 Foreground="#000000"/>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="110"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Label Content="Standard WPF TextBox:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right"/>
+            <TextBox Width="100"
+                     Height="25"
+                     Grid.Column="1" 
+                     Grid.Row="0"
+                     Background="{StaticResource BackgroundBrush}"
+                     Foreground="{StaticResource ForegroundBrush}"
+                     SelectionBrush="{StaticResource SelectionBrush}"
+                     Text="{Binding Path=SampleText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="NanoTextBox:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"/>
+            <nanoTextBox:NanoTextBox Width="100"
+                                     Height="25"
+                                     Grid.Column="1" 
+                                     Grid.Row="1"
+                                     Background="{StaticResource BackgroundBrush}"
+                                     Foreground="{StaticResource ForegroundBrush}"
+                                     SelectionBrush="{StaticResource SelectionBrush}"
+                                     SelectionForeground="{StaticResource SelectionForegroundBrush}"
+                                     Text="{Binding Path=SampleText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+        </Grid>
     </Grid>
 </Window>

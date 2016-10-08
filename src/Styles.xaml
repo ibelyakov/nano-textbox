@@ -8,7 +8,8 @@
                     <nanoTextBox:InternalNanoTextBox BaseBackground="{TemplateBinding Background}"
                                                      BaseForeground="{TemplateBinding Foreground}"
                                                      BaseSelectionBrush="{TemplateBinding SelectionBrush}"
-                                                     SelectionForeground="{TemplateBinding SelectionForeground}"/>
+                                                     SelectionForeground="{TemplateBinding SelectionForeground}"
+                                                     Text="{TemplateBinding Text}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
