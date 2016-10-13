@@ -28,8 +28,8 @@
                 <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Standard WPF TextBox:" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right"/>
             <TextBox Width="100"

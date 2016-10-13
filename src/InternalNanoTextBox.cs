@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace NanoTextBox
@@ -12,7 +13,6 @@ namespace NanoTextBox
     internal class InternalNanoTextBox : TextBox
     {
         private Point lastRenderPoint = new Point(0, 0);
-        private double lastRenderWidth;
 
         /// <summary>
         /// Identifies the SelectionForeground dependency property.
@@ -24,6 +24,9 @@ namespace NanoTextBox
                 typeof(InternalNanoTextBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
+        /// <summary>
+        /// Identifies the BaseBackground dependency property.
+        /// </summary>
         public static DependencyProperty BaseBackgroundProperty =
             DependencyProperty.Register(
                 "BaseBackground",
@@ -31,6 +34,9 @@ namespace NanoTextBox
                 typeof(InternalNanoTextBox),
                 new FrameworkPropertyMetadata(Panel.BackgroundProperty.DefaultMetadata.DefaultValue, FrameworkPropertyMetadataOptions.None));
 
+        /// <summary>
+        /// Identifies the BaseForeground dependency property.
+        /// </summary>
         public static DependencyProperty BaseForegroundProperty =
             DependencyProperty.Register(
                 "BaseForeground",
@@ -48,6 +54,9 @@ namespace NanoTextBox
                 typeof(InternalNanoTextBox),
                 new FrameworkPropertyMetadata(new SolidColorBrush(SystemColors.HighlightColor), FrameworkPropertyMetadataOptions.AffectsRender));
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public InternalNanoTextBox()
         {
             Background = new SolidColorBrush(Colors.Transparent);
@@ -110,6 +119,18 @@ namespace NanoTextBox
             set { SetValue(BaseSelectionBrushProperty, value); }
         }
 
+        protected override void OnTextInput(TextCompositionEventArgs e)
+        {
+            base.OnTextInput(e);
+            InvalidateVisual();
+        }
+
+        protected override void OnPreviewKeyUp(KeyEventArgs e)
+        {
+            base.OnPreviewKeyUp(e);
+            InvalidateVisual();
+        }
+
         protected override void OnSelectionChanged(RoutedEventArgs e)
         {
             base.OnSelectionChanged(e);
@@ -132,8 +153,24 @@ namespace NanoTextBox
             if (string.IsNullOrEmpty(Text))
                 return;
 
-            var firstLine = GetFirstVisibleLineIndex();
-            var firstChar = (firstLine == 0) ? 0 : GetCharacterIndexFromLineIndex(firstLine);
+            var firstChar = 0;
+            var cRect = GetRectFromCharacterIndex(firstChar);
+            var renderPoint = new Point(0, 0);
+            if (!double.IsInfinity(cRect.Top))
+            {
+                renderPoint.X = cRect.Left;
+                renderPoint.Y = cRect.Top;
+            }
+            else
+            {
+                renderPoint.X = HorizontalOffset > 0
+                    ? -HorizontalOffset
+                    : lastRenderPoint.X;
+
+                renderPoint.Y = VerticalOffset > 0
+                    ? -VerticalOffset
+                    : lastRenderPoint.Y;
+            }
 
             var formattedText = new FormattedText(
                 Text,
@@ -143,10 +180,11 @@ namespace NanoTextBox
                 FontSize,
                 BaseForeground);
 
-            var cRect = GetRectFromCharacterIndex(firstChar);
-            var renderPoint = double.IsInfinity(cRect.Top)
-                ? new Point(lastRenderPoint.X + lastRenderWidth - formattedText.Width, lastRenderPoint.Y)
-                : new Point(cRect.Left, cRect.Top);
+            if (AcceptsReturn || TextWrapping != TextWrapping.NoWrap)
+            {
+                formattedText.MaxTextWidth = ActualWidth - Margin.Left - Margin.Right;
+                formattedText.Trimming = TextTrimming.None;
+            }
 
             if (IsFocused)
             {
@@ -167,7 +205,6 @@ namespace NanoTextBox
 
             drawingContext.DrawText(formattedText, renderPoint);
             lastRenderPoint = renderPoint;
-            lastRenderWidth = formattedText.Width;
         }
     }
 }
