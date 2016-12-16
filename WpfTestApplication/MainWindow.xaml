@@ -8,9 +8,6 @@
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/NanoTextBox;component/Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
             <Color x:Key="BackgroundColor">#FFFFFF</Color>
             <Color x:Key="ForegroundColor">#000000</Color>
             <Color x:Key="SelectionBrushColor">#800060</Color>

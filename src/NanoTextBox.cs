@@ -10,6 +10,15 @@ namespace NanoTextBox
     public class NanoTextBox : TextBox
     {
         /// <summary>
+        /// Ctor
+        /// </summary>
+        static NanoTextBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NanoTextBox),
+                new FrameworkPropertyMetadata(typeof(NanoTextBox)));
+        }
+
+        /// <summary>
         /// Identifies the SelectionForeground dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectionForegroundProperty =
