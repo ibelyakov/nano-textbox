@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using SampleApplication.ViewModels;
+using System.Windows;
 
-namespace WpfTestApplication
+namespace SampleApplication.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoTextBox", "NanoTextBox.csproj", "{C7DB3544-9C00-49B8-931A-CB777C906CB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoTextBox", "NanoTextBox\NanoTextBox.csproj", "{C7DB3544-9C00-49B8-931A-CB777C906CB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTestApplication", "..\WpfTestApplication\WpfTestApplication.csproj", "{5353200E-446A-407C-B3F8-5DA5832FD2EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApplication", "SampleApplication\SampleApplication.csproj", "{5353200E-446A-407C-B3F8-5DA5832FD2EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

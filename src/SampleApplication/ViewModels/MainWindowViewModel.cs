@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using WpfTestApplication.Annotations;
+using SampleApplication.Annotations;
 
-namespace WpfTestApplication
+namespace SampleApplication.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
